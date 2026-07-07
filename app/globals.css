@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #232326;
+
+  /* Zero to One Company 브랜드 컬러 */
+  --navy: #213e8f;
+  --navy-deep: #16295e;
+  --accent: #244580;
+  --cream: #ede8de;
+  --gray-panel: #c7c7c7;
+  --dark-text: #232326;
+  --mute-text: #5a5a5e;
+  --light-text: #c9d2e4;
+  --orange: #f3a522;
+  --black-band: #1f2326;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-accent: var(--accent);
+  --color-cream: var(--cream);
+  --color-gray-panel: var(--gray-panel);
+  --color-dark-text: var(--dark-text);
+  --color-mute-text: var(--mute-text);
+  --color-light-text: var(--light-text);
+  --color-orange: var(--orange);
+  --color-black-band: var(--black-band);
+  --font-sans: "Pretendard Variable", "Pretendard", "맑은 고딕", "Malgun Gothic",
+    ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Pretendard Variable", "Pretendard", "맑은 고딕", "Malgun Gothic",
+    ui-sans-serif, system-ui, sans-serif;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}
