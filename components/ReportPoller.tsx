@@ -104,7 +104,7 @@ export default function ReportPoller({ reportId }: { reportId: string }) {
 
   return (
     <div className="flex w-full flex-col items-center gap-8">
-      <DownloadReportButton />
+      <DownloadReportButton reportId={reportId} />
       <ReportView
         report={data.report_json}
         companyName={data.company_name}
