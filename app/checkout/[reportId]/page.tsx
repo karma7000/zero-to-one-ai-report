@@ -3,6 +3,7 @@ import { getSupabaseServerClient } from "@/lib/supabase/server";
 import CheckoutWidget from "@/components/CheckoutWidget";
 import BankTransferInfo from "@/components/BankTransferInfo";
 import BankTransferClaimButton from "@/components/BankTransferClaimButton";
+import CheckoutStatusPoller from "@/components/CheckoutStatusPoller";
 import InquiryForm from "@/components/InquiryForm";
 
 // 토스 심사가 끝나 라이브 키(live_로 시작)로 교체되기 전까지는 카드 결제 위젯을
@@ -63,6 +64,8 @@ export default async function CheckoutPage({
       {error && ERROR_MESSAGES[error] && (
         <p className="text-sm text-red-600">{ERROR_MESSAGES[error]}</p>
       )}
+
+      <CheckoutStatusPoller reportId={order.id} />
 
       {TOSS_IS_LIVE ? (
         <CheckoutWidget
