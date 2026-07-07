@@ -36,9 +36,9 @@ export default function BankTransferInfo({
         </p>
       </div>
       <p className="text-xs text-mute-text">
-        입금 후 아래 &quot;결제/리포트 문의하기&quot;로 주문번호(
-        <span className="font-semibold">{reportId}</span>)와 함께 알려주시면
-        확인 후 리포트 생성을 시작해드립니다.
+        입금 후 아래 &quot;입금했어요, 확인 요청하기&quot; 버튼을 눌러주세요.
+        확인되는 즉시 이 화면이 자동으로 리포트 생성 화면으로 넘어갑니다.
+        (주문번호: <span className="font-semibold">{reportId}</span>)
       </p>
     </div>
   );

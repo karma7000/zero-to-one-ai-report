@@ -48,7 +48,7 @@ export default function CheckoutStatusPoller({
 
   return (
     <p className="text-sm font-semibold text-navy">
-      입금이 승인되었습니다! 리포트 페이지로 이동합니다...
+      입금이 승인되었습니다! 잠시만 기다려주세요, 리포트 생성 화면으로 이동합니다...
     </p>
   );
 }
