@@ -9,7 +9,10 @@ interface GenerateReportInput {
 }
 
 const MODEL = process.env.AI_MODEL || "claude-sonnet-5";
-const MAX_WEB_SEARCHES = 10;
+// Vercel Hobby 플랜의 서버리스 함수 최대 실행시간(300초) 안에 안정적으로
+// 끝내기 위해 검색 횟수를 제한한다 - 너무 많으면 에이전트 루프가 늘어져
+// 300초를 넘기고 플랫폼이 강제 종료해버린다 (예: 중국처럼 정보량이 많은 국가).
+const MAX_WEB_SEARCHES = 6;
 
 const SYSTEM_PROMPT = `당신은 한국 중소/중견기업의 해외진출을 돕는 컨설턴트입니다.
 주어진 대상 국가와 제품 정보를 바탕으로, 웹 검색 도구를 활용해 최신 시장 정보를 조사한 뒤
@@ -36,7 +39,9 @@ export async function generateReport(
 - 제품/서비스 설명: ${input.productDescription}
 
 웹 검색을 통해 해당 국가의 최신 이커머스 플랫폼 현황, 오프라인 유통 구조, 관세/규제 정보를 확인하고
-정의된 스키마에 맞춰 구조화된 리포트를 생성하세요.`,
+정의된 스키마에 맞춰 구조화된 리포트를 생성하세요.
+시간 제약이 있으니 검색은 핵심 정보 위주로 ${MAX_WEB_SEARCHES}회 이내로 빠르게 마치고,
+곧바로 리포트 작성에 들어가세요.`,
       },
     ],
     tools: [

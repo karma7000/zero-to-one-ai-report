@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import CheckoutWidget from "@/components/CheckoutWidget";
 import BankTransferInfo from "@/components/BankTransferInfo";
+import BankTransferClaimButton from "@/components/BankTransferClaimButton";
 import InquiryForm from "@/components/InquiryForm";
 
 // 토스 심사가 끝나 라이브 키(live_로 시작)로 교체되기 전까지는 카드 결제 위젯을
@@ -81,6 +82,8 @@ export default async function CheckoutPage({
         amount={order.amount_krw ?? 20000}
         companyName={order.company_name}
       />
+
+      <BankTransferClaimButton reportId={order.id} />
 
       <InquiryForm reportId={order.id} />
     </div>

@@ -1,6 +1,9 @@
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
-const STALE_GENERATION_MS = 5 * 60 * 1000; // 서버리스 함수 최대 실행시간(5분)을 넘기면 정체된 것으로 간주
+// 서버리스 함수 최대 실행시간(300초)보다 여유를 두고 정체 판정한다 - 두 값이
+// 같으면 실제로는 아직 정상 완료 중인데도 폴링 타이밍에 따라 먼저 "실패"로
+// 오판할 수 있기 때문에 6분으로 buffer를 준다.
+const STALE_GENERATION_MS = 6 * 60 * 1000;
 
 export async function GET(
   _request: Request,

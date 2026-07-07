@@ -23,6 +23,7 @@ type ReportRow = {
   generation_started_at: string | null;
   generation_completed_at: string | null;
   generation_error: string | null;
+  bank_transfer_claimed_at: string | null;
   created_at: string;
 };
 
@@ -43,6 +44,7 @@ type ReportInsert = {
   generation_started_at?: string | null;
   generation_completed_at?: string | null;
   generation_error?: string | null;
+  bank_transfer_claimed_at?: string | null;
   created_at?: string;
 };
 
