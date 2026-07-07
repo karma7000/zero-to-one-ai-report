@@ -4,6 +4,13 @@ import CheckoutWidget from "@/components/CheckoutWidget";
 import BankTransferInfo from "@/components/BankTransferInfo";
 import InquiryForm from "@/components/InquiryForm";
 
+// 토스 심사가 끝나 라이브 키(live_로 시작)로 교체되기 전까지는 카드 결제 위젯을
+// 숨긴다 - 테스트 키는 실제 과금 없이도 결제완료로 처리되어 무료로 리포트를
+// 받아갈 수 있는 구멍이 생기기 때문. 라이브 키로 바꾸는 순간 자동으로 노출된다.
+const TOSS_IS_LIVE = (process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY ?? "").startsWith(
+  "live_"
+);
+
 export default async function CheckoutPage({
   params,
   searchParams,
@@ -56,12 +63,18 @@ export default async function CheckoutPage({
         <p className="text-sm text-red-600">{ERROR_MESSAGES[error]}</p>
       )}
 
-      <CheckoutWidget
-        reportId={order.id}
-        amount={order.amount_krw ?? 20000}
-        orderName={`AI 해외진출 리포트 (${order.target_country})`}
-        customerEmail={order.email}
-      />
+      {TOSS_IS_LIVE ? (
+        <CheckoutWidget
+          reportId={order.id}
+          amount={order.amount_krw ?? 20000}
+          orderName={`AI 해외진출 리포트 (${order.target_country})`}
+          customerEmail={order.email}
+        />
+      ) : (
+        <p className="text-sm text-mute-text">
+          카드 결제는 준비 중입니다. 아래 계좌이체를 이용해주세요.
+        </p>
+      )}
 
       <BankTransferInfo
         reportId={order.id}
