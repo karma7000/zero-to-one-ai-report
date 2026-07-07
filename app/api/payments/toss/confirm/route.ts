@@ -1,7 +1,7 @@
-import { after } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { confirmTossPayment } from "@/lib/payments/toss";
-import { generateReport, REPORT_MODEL } from "@/lib/ai/generateReport";
+import { REPORT_MODEL } from "@/lib/ai/generateReport";
+import { startReportGeneration } from "@/lib/reports/startGeneration";
 
 export const maxDuration = 300;
 
@@ -73,32 +73,11 @@ export async function GET(request: Request) {
     })
     .eq("id", orderId);
 
-  after(async () => {
-    try {
-      const report = await generateReport({
-        companyName,
-        targetCountry,
-        productDescription,
-      });
-
-      await supabase
-        .from("reports")
-        .update({
-          status: "completed",
-          report_json: report,
-          generation_completed_at: new Date().toISOString(),
-        })
-        .eq("id", orderId);
-    } catch (err) {
-      await supabase
-        .from("reports")
-        .update({
-          status: "failed",
-          generation_error: err instanceof Error ? err.message : String(err),
-          generation_completed_at: new Date().toISOString(),
-        })
-        .eq("id", orderId);
-    }
+  startReportGeneration({
+    reportId: orderId,
+    companyName,
+    targetCountry,
+    productDescription,
   });
 
   return Response.redirect(new URL(`/report/${orderId}`, url.origin));

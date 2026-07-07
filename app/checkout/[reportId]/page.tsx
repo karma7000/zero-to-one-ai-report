@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import CheckoutWidget from "@/components/CheckoutWidget";
+import BankTransferInfo from "@/components/BankTransferInfo";
 import InquiryForm from "@/components/InquiryForm";
 
 export default async function CheckoutPage({
@@ -60,6 +61,12 @@ export default async function CheckoutPage({
         amount={order.amount_krw ?? 20000}
         orderName={`AI 해외진출 리포트 (${order.target_country})`}
         customerEmail={order.email}
+      />
+
+      <BankTransferInfo
+        reportId={order.id}
+        amount={order.amount_krw ?? 20000}
+        companyName={order.company_name}
       />
 
       <InquiryForm reportId={order.id} />
