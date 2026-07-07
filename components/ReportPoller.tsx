@@ -77,6 +77,8 @@ export default function ReportPoller({ reportId }: { reportId: string }) {
           AI가 웹 검색을 통해 시장 정보를 조사하고 리포트를 작성하고 있습니다.
           <br />
           보통 3~5분 정도 소요됩니다.
+          <br />
+          대기하는 동안 이 창을 끄지 마시고, 다른 창을 보셔도 됩니다.
         </p>
       </div>
     );
