@@ -3,7 +3,7 @@ import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { confirmTossPayment } from "@/lib/payments/toss";
 import { generateReport, REPORT_MODEL } from "@/lib/ai/generateReport";
 
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
