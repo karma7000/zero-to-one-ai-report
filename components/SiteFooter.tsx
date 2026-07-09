@@ -12,8 +12,8 @@ export default function SiteFooter() {
         <div className="border-t border-white/10 pt-3 text-[12px] leading-relaxed text-light-text/70">
           상호: 제로투원 · 대표자: 권성우 · 사업자등록번호: 207-45-01144
           <br />
-          사업장 소재지: 서울특별시 양천구 목동동로 270, 301동 705호(목동,
-          목동3차월드메르디앙) · 연락처: 010-2314-6335
+          사업장 소재지: 서울특별시 양천구 목동동로 270, 301동 705호 · 연락처:
+          010-2314-6335
         </div>
       </div>
     </footer>
